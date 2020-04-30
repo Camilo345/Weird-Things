@@ -6,18 +6,19 @@
 package control;
 
 import java.util.LinkedList;
+import modelo.Administrador;
 import modelo.Clasificacion;
 
 /**
  *
  * @author Bolaños Aldana
  */
-public class ControlCategorias {
+public class ControlAdministradores {
     
-      public LinkedList<Clasificacion> consultarCategorias() {
-        String sql="Select * from clientes;";
-        Clasificacion objc=new Clasificacion();
-        LinkedList<Clasificacion> listc=objc.buscarclasificacion(sql);
+      public LinkedList<Administrador> consultarAdministradores() {
+        String sql="Select * from Administradores;";
+        Administrador objc=new Administrador();
+        LinkedList<Administrador> listc=objc.buscarAdministradores(sql);
         
         return listc;
     }

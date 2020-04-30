@@ -40,7 +40,7 @@ public class BaseDatos {
         boolean t = false;
         try {
             Class.forName("com.mysql.jdbc.Driver");                                      //user  //pass
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/WeirdThings", "root", "root");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/weirdthings", "root", "root");
             st = conexion.createStatement();
 
             t = true;
