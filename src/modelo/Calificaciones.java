@@ -22,6 +22,14 @@ public class Calificaciones {
         this.Calificacion = Calificacion;
     }
 
+    public int getIdCalificacion() {
+        return IdCalificacion;
+    }
+
+    public void setIdCalificacion(int IdCalificacion) {
+        this.IdCalificacion = IdCalificacion;
+    }  
+
     /**
      * Get the value of nombreCalificacion
      *
@@ -40,24 +48,8 @@ public class Calificaciones {
         this.Calificacion = Calificacion;
     }
 
-
-    /**
-     * Get the value of IdCalificacion
-     *
-     * @return the value of IdCalificacion
-     */
-    public int getIdCalificacion() {
-        return IdCalificacion;
-    }
-
-    /**
-     * Set the value of IdCalificacion
-     *
-     * @param IdCalificacion new value of IdCalificacion
-     */
-    public void setIdCalificacion(int IdCalificacion) {
-        this.IdCalificacion = IdCalificacion;
-    }
-
-    
+    @Override
+    public String toString() {
+        return "Calificaciones{" + "IdCalificacion=" + IdCalificacion + ", Calificacion=" + Calificacion + '}';
+    }    
 }

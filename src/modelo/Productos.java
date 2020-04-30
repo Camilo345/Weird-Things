@@ -9,9 +9,9 @@ package modelo;
  *
  * @author feli_
  */
-public class Producto {
-
-    private int IDProdcucto;
+public class Productos {
+    
+    private String IdProducto;
     private String nombreProducto;
     private String descripcionProducto;
     private double precioProducto;
@@ -20,11 +20,11 @@ public class Producto {
     private int IdAdminF;
     private int IdCalificacionF;
 
-    public Producto() {
+    public Productos() {
     }
 
-    public Producto(int IDProdcucto, String nombreProducto, String descripcionProducto, double precioProducto, int unidadesProducto, int IDSubcategoriaF, int IdAdminF, int IdCalificacionF) {
-        this.IDProdcucto = IDProdcucto;
+    public Productos(String IdProducto, String nombreProducto, String descripcionProducto, double precioProducto, int unidadesProducto, int IDSubcategoriaF, int IdAdminF, int IdCalificacionF) {
+        this.IdProducto = IdProducto;
         this.nombreProducto = nombreProducto;
         this.descripcionProducto = descripcionProducto;
         this.precioProducto = precioProducto;
@@ -33,7 +33,24 @@ public class Producto {
         this.IdAdminF = IdAdminF;
         this.IdCalificacionF = IdCalificacionF;
     }
-    
+
+    /**
+     * Get the value of IdProductos
+     *
+     * @return the value of IdProductos
+     */
+    public String getIdProducto() {
+        return IdProducto;
+    }
+
+    /**
+     * Set the value of IdProductos
+     *
+     * @param IdProducto new value of IdProductos
+     */
+    public void setIdProducto(String IdProducto) {
+        this.IdProducto = IdProducto;
+    }
 
     /**
      * Get the value of IdCalificacion
@@ -167,29 +184,9 @@ public class Producto {
         this.nombreProducto = nombreProducto;
     }
 
-
-    /**
-     * Get the value of IDProdcucto
-     *
-     * @return the value of IDProdcucto
-     */
-    public int getIDProdcucto() {
-        return IDProdcucto;
-    }
-
-    /**
-     * Set the value of IDProdcucto
-     *
-     * @param IDProdcucto new value of IDProdcucto
-     */
-    public void setIDProdcucto(int IDProdcucto) {
-        this.IDProdcucto = IDProdcucto;
-    }
-
     @Override
     public String toString() {
-        return "Producto{" + "IDProdcucto=" + IDProdcucto + ", nombreProducto=" + nombreProducto + ", descripcionProducto=" + descripcionProducto + ", precioProducto=" + precioProducto + ", unidadesProducto=" + unidadesProducto + ", IDSubcategoriaF=" + IDSubcategoriaF + ", IdAdminF=" + IdAdminF + ", IdCalificacionF=" + IdCalificacionF + '}';
+        return "Productos{" + "IdProducto=" + IdProducto + ", nombreProducto=" + nombreProducto + ", descripcionProducto=" + descripcionProducto + ", precioProducto=" + precioProducto + ", unidadesProducto=" + unidadesProducto + ", IDSubcategoriaF=" + IDSubcategoriaF + ", IdAdminF=" + IdAdminF + ", IdCalificacionF=" + IdCalificacionF + '}';
     }
 
-    
 }

@@ -9,16 +9,38 @@ package modelo;
  *
  * @author feli_
  */
-public class Categoria {
+public class Categorias {
     
+    private int idCate;
+
         private String nombreCategoría;
 
-    public Categoria() {
+    public Categorias() {
     }
 
-    public Categoria(String nombreCategoría) {
+    public Categorias(int idCate, String nombreCategoría) {
+        this.idCate = idCate;
         this.nombreCategoría = nombreCategoría;
-    }        
+    }
+     
+
+    /**
+     * Get the value of idCate
+     *
+     * @return the value of idCate
+     */
+    public int getIdCate() {
+        return idCate;
+    }
+
+    /**
+     * Set the value of idCate
+     *
+     * @param idCate new value of idCate
+     */
+    public void setIdCate(int idCate) {
+        this.idCate = idCate;
+    }
 
     /**
      * Get the value of nombreCategoría
@@ -40,7 +62,7 @@ public class Categoria {
 
     @Override
     public String toString() {
-        return "categoria{" + "nombreCategor\u00eda=" + nombreCategoría + '}';
+        return "Categorias{" + "idCate=" + idCate + ", nombreCategor\u00eda=" + nombreCategoría + '}';
     }
     
 }

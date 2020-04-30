@@ -8,7 +8,7 @@ package vista;
 import control.ControlCategorias;
 import java.util.LinkedList;
 import javax.swing.table.DefaultTableModel;
-import modelo.Clasificacion;
+import modelo.Clasificaciones;
 
 /**
  *
@@ -19,7 +19,7 @@ public class BusquedaCategorias extends javax.swing.JFrame {
     /**
      * Creates new form BusquedaCategorias
      */
-    LinkedList<Clasificacion> listaCategorias;
+    LinkedList<Clasificaciones> listaCategorias;
     
     public BusquedaCategorias() {
         initComponents();

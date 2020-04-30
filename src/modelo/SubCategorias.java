@@ -9,11 +9,40 @@ package modelo;
  *
  * @author feli_
  */
-public class SubCategoria {
+public class SubCategorias {
     
+    private int idSubCate;
     private String nombreSubCategoria;
     private String nombreCategoriaF;
 
+    
+    public SubCategorias() {
+    }  
+
+    public SubCategorias(int idSubCate, String nombreSubCategoria, String nombreCategoriaF) {
+        this.idSubCate = idSubCate;
+        this.nombreSubCategoria = nombreSubCategoria;
+        this.nombreCategoriaF = nombreCategoriaF;
+    }
+
+    /**
+     * Get the value of idSubCate
+     *
+     * @return the value of idSubCate
+     */
+    public int getIdSubCate() {
+        return idSubCate;
+    }
+
+    /**
+     * Set the value of idSubCate
+     *
+     * @param idSubCate new value of idSubCate
+     */
+    public void setIdSubCate(int idSubCate) {
+        this.idSubCate = idSubCate;
+    }
+    
     /**
      * Get the value of nombreCategoriaF
      *
@@ -33,14 +62,6 @@ public class SubCategoria {
     }
 
     
-
-    public SubCategoria() {
-    }  
-
-    public SubCategoria(String nombreSubCategoria, String nombreCategoriaF) {
-        this.nombreSubCategoria = nombreSubCategoria;
-        this.nombreCategoriaF = nombreCategoriaF;
-    }
 
     /**
      * Get the value of nombreSubCategoria
@@ -62,7 +83,7 @@ public class SubCategoria {
 
     @Override
     public String toString() {
-        return "SubCategoria{" + "nombreSubCategoria=" + nombreSubCategoria + ", nombreCategoriaF=" + nombreCategoriaF + '}';
-    }   
+        return "SubCategorias{" + "idSubCate=" + idSubCate + ", nombreSubCategoria=" + nombreSubCategoria + ", nombreCategoriaF=" + nombreCategoriaF + '}';
+    }
     
 }

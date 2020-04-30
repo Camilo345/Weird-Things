@@ -15,14 +15,14 @@ import java.util.LinkedList;
  *
  * @author Bolaños Aldana
  */
-public class Clasificacion {
+public class Clasificaciones {
     private int IDCate;
     private String nombreCategoria; 
 
-    public Clasificacion() {
+    public Clasificaciones() {
     }
 
-    public Clasificacion(int IDCate, String nombreCategoria) {
+    public Clasificaciones(int IDCate, String nombreCategoria) {
         this.IDCate = IDCate;
         this.nombreCategoria = nombreCategoria;
     }
@@ -48,10 +48,10 @@ public class Clasificacion {
         return "Clasificacion{" + "IDCate=" + IDCate + ", nombreCategoria=" + nombreCategoria + '}';
     }
 
-    public LinkedList<Clasificacion> buscarclasificacion(String sql) {
+    public LinkedList<Clasificaciones> buscarclasificacion(String sql) {
         
      ResultSet rs = null;
-        LinkedList<Clasificacion> lc = new LinkedList<>();
+        LinkedList<Clasificaciones> lc = new LinkedList<>();
         BaseDatos objcone = new BaseDatos();
         int idc;
         String nombreClasificacion;
@@ -64,7 +64,7 @@ public class Clasificacion {
                     idc = rs.getInt("IDCate");
                     nombreClasificacion = rs.getNString("nombre1");
                  
-                    lc.add(new Clasificacion(idc, nombreClasificacion));
+                    lc.add(new Clasificaciones(idc, nombreClasificacion));
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
