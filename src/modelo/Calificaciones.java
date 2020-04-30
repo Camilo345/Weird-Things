@@ -5,6 +5,12 @@
  */
 package modelo;
 
+import control.BaseDatos;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.LinkedList;
+
 /**
  *
  * @author feli_
@@ -59,5 +65,34 @@ public class Calificaciones {
         this.IdCalificacion = IdCalificacion;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Calificaciones{" + "IdCalificacion=" + IdCalificacion + ", Calificacion=" + Calificacion + '}';
+    }
+
+     public LinkedList<Calificaciones> buscarCalificaciones(String sql) {
+        
+     ResultSet rs = null;
+        LinkedList<Calificaciones> lc = new LinkedList<>();
+        BaseDatos objcone = new BaseDatos();
+        int idc;
+        double Calificacion;
+     
+        if (objcone.crearConexion()) {
+            try {
+                Statement sentencia = objcone.getConexion().createStatement();
+                rs = sentencia.executeQuery(sql);
+                while (rs.next()) {
+                    idc = rs.getInt("IdCalificacion");
+                    Calificacion = rs.getDouble("nombreCalificacion");
+                 
+                    lc.add(new Calificaciones(idc, Calificacion));
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+
+            }
+        }
+        return lc;
+     }
 }
