@@ -126,8 +126,8 @@ public class Administrador {
                 rs = sentencia.executeQuery(sql);
                 while (rs.next()) {
                     idAdmin = rs.getInt("idAdmin");
-                    usuarioAdmin = rs.getNString("usuarioAdmin");
-                    contraseñaAdmin = rs.getNString("contraseñaAdmin");
+                    usuarioAdmin = rs.getString("usuarioAdmin");
+                    contraseñaAdmin = rs.getString("contraseñaAdmin");
                      nombreAd1 = rs.getString("nombreAd1");
                     try {
                         nombreAd2 = rs.getString("nombreAd2");

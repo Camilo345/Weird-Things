@@ -9,7 +9,7 @@ import control.ControlAdministradores;
 import control.controlCategoria;
 import java.util.LinkedList;
 import javax.swing.table.DefaultTableModel;
-import modelo.Clasificacion;
+import modelo.Categoria;
 
 /**
  *
@@ -20,7 +20,7 @@ public class BusquedaCategorias extends javax.swing.JFrame {
     /**
      * Creates new form BusquedaCategorias
      */
-    LinkedList<Clasificacion> listaCategorias;
+    LinkedList<Categoria> listaCategorias;
     
     public BusquedaCategorias() {
         initComponents();

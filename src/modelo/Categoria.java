@@ -5,42 +5,75 @@
  */
 package modelo;
 
+import control.BaseDatos;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.LinkedList;
+
 /**
  *
- * @author feli_
+ * @author Bolaños Aldana
  */
 public class Categoria {
-    
-        private String nombreCategoría;
+    private int IDCate;
+    private String nombreCategoria; 
 
     public Categoria() {
     }
 
-    public Categoria(String nombreCategoría) {
-        this.nombreCategoría = nombreCategoría;
-    }        
-
-    /**
-     * Get the value of nombreCategoría
-     *
-     * @return the value of nombreCategoría
-     */
-    public String getNombreCategoría() {
-        return nombreCategoría;
+    public Categoria(int IDCate, String nombreCategoria) {
+        this.IDCate = IDCate;
+        this.nombreCategoria = nombreCategoria;
     }
 
-    /**
-     * Set the value of nombreCategoría
-     *
-     * @param nombreCategoría new value of nombreCategoría
-     */
-    public void setNombreCategoría(String nombreCategoría) {
-        this.nombreCategoría = nombreCategoría;
+    public int getIDCate() {
+        return IDCate;
+    }
+
+    public void setIDCate(int IDCate) {
+        this.IDCate = IDCate;
+    }
+
+    public String getNombreCategoria() {
+        return nombreCategoria;
+    }
+
+    public void setNombreCategoria(String nombreCategoria) {
+        this.nombreCategoria = nombreCategoria;
     }
 
     @Override
     public String toString() {
-        return "categoria{" + "nombreCategor\u00eda=" + nombreCategoría + '}';
+        return "Clasificacion{" + "IDCate=" + IDCate + ", nombreCategoria=" + nombreCategoria + '}';
     }
+
+    public LinkedList<Categoria> buscarCategorias(String sql) {
+        
+     ResultSet rs = null;
+        LinkedList<Categoria> lc = new LinkedList<>();
+        BaseDatos objcone = new BaseDatos();
+        int idc;
+        String nombreCategorias;
+     
+        if (objcone.crearConexion()) {
+            try {
+                Statement sentencia = objcone.getConexion().createStatement();
+                rs = sentencia.executeQuery(sql);
+                while (rs.next()) {
+                    idc = rs.getInt("IDCate");
+                    nombreCategorias = rs.getString("nombreCategoria");
+                 
+                    lc.add(new Categoria(idc, nombreCategorias));
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+
+            }
+        }
+        return lc;
+        
+    }
+    
     
 }

@@ -6,7 +6,7 @@
 package control;
 
 import java.util.LinkedList;
-import modelo.Clasificacion;
+import modelo.Categoria;
 
 /**
  *
@@ -14,10 +14,10 @@ import modelo.Clasificacion;
  */
 public class controlCategoria {
     
-     public LinkedList<Clasificacion> consultarCategorias() {
+     public LinkedList<Categoria> consultarCategorias() {
         String sql="Select * from Categorias;";
-        Clasificacion objc=new Clasificacion();
-        LinkedList<Clasificacion> listc=objc.buscarclasificacion(sql);
+        Categoria objc=new Categoria();
+        LinkedList<Categoria> listc=objc.buscarCategorias(sql);
         
         return listc;
     }

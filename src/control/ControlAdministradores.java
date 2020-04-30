@@ -7,7 +7,7 @@ package control;
 
 import java.util.LinkedList;
 import modelo.Administrador;
-import modelo.Clasificacion;
+import modelo.Categoria;
 
 /**
  *
