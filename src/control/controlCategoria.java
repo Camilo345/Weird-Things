@@ -12,13 +12,13 @@ import modelo.Clasificaciones;
  *
  * @author Bolaños Aldana
  */
-public class ControlCategorias {
+public class controlCategoria {
     
       public LinkedList<Clasificaciones> consultarCategorias() {
         String sql="Select * from clientes;";
         Clasificaciones objc=new Clasificaciones();
         LinkedList<Clasificaciones> listc=objc.buscarclasificacion(sql);
         
-        return listc;
     }
+    
 }

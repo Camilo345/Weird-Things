@@ -62,7 +62,7 @@ public class Clasificaciones {
                 rs = sentencia.executeQuery(sql);
                 while (rs.next()) {
                     idc = rs.getInt("IDCate");
-                    nombreClasificacion = rs.getNString("nombre1");
+                    nombreClasificacion = rs.getString("nombreCategoria");
                  
                     lc.add(new Clasificaciones(idc, nombreClasificacion));
                 }

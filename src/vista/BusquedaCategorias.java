@@ -5,7 +5,8 @@
  */
 package vista;
 
-import control.ControlCategorias;
+import control.ControlAdministradores;
+import control.controlCategoria;
 import java.util.LinkedList;
 import javax.swing.table.DefaultTableModel;
 import modelo.Clasificaciones;
@@ -113,7 +114,7 @@ public class BusquedaCategorias extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
      
           String criterioBusqueda = jTextField1.getText();
-        ControlCategorias objcc = new ControlCategorias();
+        controlCategoria objcc = new controlCategoria();
         int ncol;
         Object[] fila;
         if (criterioBusqueda.equals("")) {
