@@ -9,17 +9,37 @@ package modelo;
  *
  * @author feli_
  */
-public class foto {
+public class Foto {
     
         private String imagen;
+    private int IDProductoF;
 
-    public foto() {
+    /**
+     * Get the value of IDProductoF
+     *
+     * @return the value of IDProductoF
+     */
+    public int getIDProductoF() {
+        return IDProductoF;
     }
 
-    public foto(String imagen) {
-        this.imagen = imagen;
-    }         
+    /**
+     * Set the value of IDProductoF
+     *
+     * @param IDProductoF new value of IDProductoF
+     */
+    public void setIDProductoF(int IDProductoF) {
+        this.IDProductoF = IDProductoF;
+    }
 
+
+    public Foto() {
+    }
+
+    public Foto(String imagen, int IDProductoF) {
+        this.imagen = imagen;
+        this.IDProductoF = IDProductoF;
+    }
     /**
      * Get the value of imagen
      *
@@ -40,9 +60,7 @@ public class foto {
 
     @Override
     public String toString() {
-        return "foto{" + "imagen=" + imagen + '}';
+        return "Foto{" + "imagen=" + imagen + ", IDProductoF=" + IDProductoF + '}';
     }
-
-    
     
 }
