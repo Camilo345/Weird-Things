@@ -5,6 +5,12 @@
  */
 package modelo;
 
+import control.BaseDatos;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.LinkedList;
+
 /**
  *
  * @author feli_
@@ -191,5 +197,44 @@ public class Producto {
         return "Producto{" + "IDProdcucto=" + IDProdcucto + ", nombreProducto=" + nombreProducto + ", descripcionProducto=" + descripcionProducto + ", precioProducto=" + precioProducto + ", unidadesProducto=" + unidadesProducto + ", IDSubcategoriaF=" + IDSubcategoriaF + ", IdAdminF=" + IdAdminF + ", IdCalificacionF=" + IdCalificacionF + '}';
     }
 
+      public LinkedList<Producto> buscarProducto(String sql) {
+       
+        ResultSet rs = null;
+        LinkedList<Producto> lp = new LinkedList<>();
+        BaseDatos objcone = new BaseDatos();
+     int IDProdcucto2=0;
+     String nombreProducto2="";
+     String descripcionProducto2="";
+     double precioProducto2=0;
+     int unidadesProducto2=0;
+     int IDSubcategoriaF2=0;
+     int IdAdminF2=0;
+     int IdCalificacionF2=0;
+        if (objcone.crearConexion()) {
+            try {
+                Statement sentencia = objcone.getConexion().createStatement();
+                rs = sentencia.executeQuery(sql);
+                while (rs.next()) {
+                    IDProdcucto2 = rs.getInt("IDProdcucto");
+                    nombreProducto2 = rs.getString("nombreProducto");
+                    descripcionProducto2 = rs.getString("descripcionProducto");
+                    precioProducto2 = rs.getDouble("precioProducto");
+                    unidadesProducto2 = rs.getInt("unidadesProducto");
+                    IDSubcategoriaF2 = rs.getInt("IDSubcategoriaF");
+                    IdAdminF2 = rs.getInt("IdAdminF");
+                    IdCalificacionF2 = rs.getInt("IdCalificacionF");
+                  
+                 
+                    lp.add(new Producto(IDProdcucto2, nombreProducto2, descripcionProducto2, precioProducto2,
+                                        unidadesProducto2,IDSubcategoriaF2,IdAdminF2,IdCalificacionF2));
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+
+            }
+        }
+        return lp;
+        
+    }
     
 }
