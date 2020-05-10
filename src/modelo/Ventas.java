@@ -5,7 +5,12 @@
  */
 package modelo;
 
+import control.BaseDatos;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.LinkedList;
 
 /**
  *
@@ -67,6 +72,35 @@ public class Ventas {
         return "Ventas{" + "IDinventario=" + IDinventario + ", valorTotal=" + valorTotal + ", FechaVenta=" + FechaVenta + ", correoCuentaf=" + correoCuentaf + '}';
     }
        
-    
+    public LinkedList<Ventas> buscarVentas(String sql) {
+       
+        ResultSet rs = null;
+        LinkedList<Ventas> lv = new LinkedList<>();
+        BaseDatos objcone = new BaseDatos();
+    int IDinventario2=0;
+    int valorTotal2=0;
+    Date FechaVenta2;
+    String correoCuentaf2="";
+
+        if (objcone.crearConexion()) {
+            try {
+                Statement sentencia = objcone.getConexion().createStatement();
+                rs = sentencia.executeQuery(sql);
+                while (rs.next()) {
+                    IDinventario2 = rs.getInt("IDinventario");
+                    valorTotal2 = rs.getInt("valorTotal");
+                    FechaVenta2 = rs.getDate("FechaVenta");
+                     correoCuentaf2 = rs.getString("correoCuentaf");
+                   
+                    lv.add(new Ventas(IDinventario2, valorTotal2, FechaVenta2, correoCuentaf2));
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+
+            }
+        }
+        return lv;
+        
+    }
     
 }

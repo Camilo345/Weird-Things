@@ -113,7 +113,7 @@ public class Administrador {
         ResultSet rs = null;
         LinkedList<Administrador> lc = new LinkedList<>();
         BaseDatos objcone = new BaseDatos();
-      int idAdmin;
+    int idAdmin;
     String usuarioAdmin="";
     String contraseñaAdmin="";
     String nombreAd1="";
@@ -144,7 +144,7 @@ public class Administrador {
                         apellidoAd2 = "";
                     }
                  
-                    lc.add(new Administrador(idAdmin, nombreAd1, nombreAd2, apellidoAd1, apellidoAd2));
+                    lc.add(new Administrador(idAdmin,usuarioAdmin,contraseñaAdmin, nombreAd1, nombreAd2, apellidoAd1, apellidoAd2));
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
