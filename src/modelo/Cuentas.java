@@ -5,6 +5,13 @@
  */
 package modelo;
 
+import control.BaseDatos;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.LinkedList;
+
 /**
  *
  * @author feli_
@@ -20,12 +27,12 @@ public class Cuentas {
     private String apellido2;
     private String direccionCuenta;
     private String metodoDePago;
-    private String fechaNacimiento;
+    private Date fechaNacimiento;
 
     public Cuentas() {
     }
 
-    public Cuentas(String correoCuenta, String contraseñaCuenta, String apodoCuenta, String nombre1, String nombre2, String apellido1, String apellido2, String direccionCuenta, String metodoDePago, String fechaNacimiento) {
+    public Cuentas(String correoCuenta, String contraseñaCuenta, String apodoCuenta, String nombre1, String nombre2, String apellido1, String apellido2, String direccionCuenta, String metodoDePago, Date fechaNacimiento) {
         this.correoCuenta = correoCuenta;
         this.contraseñaCuenta = contraseñaCuenta;
         this.apodoCuenta = apodoCuenta;
@@ -43,7 +50,7 @@ public class Cuentas {
      *
      * @return the value of fechaNacimiento
      */
-    public String getFechaNacimiento() {
+    public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
@@ -52,7 +59,7 @@ public class Cuentas {
      *
      * @param fechaNacimiento new value of fechaNacimiento
      */
-    public void setFechaNacimiento(String fechaNacimiento) {
+    public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -233,5 +240,59 @@ public class Cuentas {
         return "Cuentas{" + "correoCuenta=" + correoCuenta + ", contrase\u00f1aCuenta=" + contraseñaCuenta + ", apodoCuenta=" + apodoCuenta + ", nombre1=" + nombre1 + ", nombre2=" + nombre2 + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", direccionCuenta=" + direccionCuenta + ", metodoDePago=" + metodoDePago + ", fechaNacimiento=" + fechaNacimiento + '}';
     }
 
+      public LinkedList<Cuentas> buscarCuentas(String sql) {
+       
+        ResultSet rs = null;
+        LinkedList<Cuentas> lc = new LinkedList<>();
+        BaseDatos objcone = new BaseDatos();
+     String correoCuenta2="";
+     String contraseñaCuenta2="";
+     String apodoCuenta2="";
+     String nombre12="";
+     String nombre22="";
+     String apellido12="";
+     String apellido22="";
+     String direccionCuenta2="";
+     String metodoDePago2="";
+     Date fechaNacimiento2;
+        if (objcone.crearConexion()) {
+            try {
+                Statement sentencia = objcone.getConexion().createStatement();
+                rs = sentencia.executeQuery(sql);
+                while (rs.next()) {
+                    correoCuenta2 = rs.getString("correoCuenta");
+                    contraseñaCuenta2 = rs.getString("contraseñaCuenta");
+                    apodoCuenta2 = rs.getString("apodoCuenta");
+                    nombre12 = rs.getString("nombre1");
+                    try {
+                        nombre22 = rs.getString("nombre2");
+                    } catch (NullPointerException n) { }
+                    if(nombre22==null){
+                        nombre22 = "";
+                    }
+                    
+                    apellido12 = rs.getString("apellido1");
+                     try {
+                        apellido22 = rs.getString("apellido2");
+                    } catch (NullPointerException n) { }
+                    if(apellido22==null){
+                        apellido22 = "";
+                    }
+                 
+                    direccionCuenta2 = rs.getString("direccionCuenta");
+                    metodoDePago2 = rs.getString("metodoDePago");
+                    fechaNacimiento2 = rs.getDate("fechaNacimiento2");
+                    
+                    lc.add(new Cuentas(correoCuenta2, contraseñaCuenta2, apodoCuenta2, nombre12, nombre22,apellido12,apellido22,direccionCuenta2,metodoDePago2,fechaNacimiento2));
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+
+            }
+        }
+        return lc;
+        
+    }
+    
     
 }
