@@ -5,6 +5,12 @@
  */
 package modelo;
 
+import control.BaseDatos;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.LinkedList;
+
 /**
  *
  * @author feli_
@@ -61,6 +67,50 @@ public class Foto {
     @Override
     public String toString() {
         return "Foto{" + "imagen=" + imagen + ", IDProductoF=" + IDProductoF + '}';
+    }
+    
+     public LinkedList<Foto> buscarFoto(String sql) {
+        
+     ResultSet rs = null;
+        LinkedList<Foto> lf = new LinkedList<>();
+        BaseDatos objcone = new BaseDatos();
+        String imagen2;
+        int IDProductoF2;
+     
+        if (objcone.crearConexion()) {
+            try {
+                Statement sentencia = objcone.getConexion().createStatement();
+                rs = sentencia.executeQuery(sql);
+                while (rs.next()) {
+                    imagen2 = rs.getString("imagen");
+                    IDProductoF2 = rs.getInt("IDProductoF");
+                 
+                    lf.add(new Foto(imagen2, IDProductoF2));
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+
+            }
+        }
+        return lf;
+        
+    }
+
+    public void EliminarFoto(String sql) {
+        
+         ResultSet rs = null;
+         BaseDatos objcone = new BaseDatos();
+          if (objcone.crearConexion()) {
+            try {
+                Statement sentencia = objcone.getConexion().createStatement();
+                rs = sentencia.executeQuery(sql);
+               
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+
+            }
+    }
+        
     }
     
 }

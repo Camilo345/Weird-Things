@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo;
+package seguridad;
 
 import control.BaseDatos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
@@ -156,98 +155,6 @@ public class Administrador {
         
     }
     
-            public boolean insert(String sql) {
-        BaseDatos objCon = new BaseDatos();
-
-        if (objCon.crearConexion()) {
-            try {
-                Statement sentencia = objCon.getConexion().createStatement();
-                sentencia.executeUpdate(sql);
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-                return false;
-            }
-        }
-        return true;
-    }
     
-            public HashMap<Integer, String> ejecutarSQLSelect(String sql) {
-
-        ResultSet rs;
-        int idAdmi;
-        String usuarioA;
-
-        BaseDatos objU = new BaseDatos();
-        HashMap<Integer, String> us = new HashMap<>();
-        try {
-            if (objU.crearConexion()) {
-                Statement sentencia = objU.getConexion().createStatement();
-                rs = sentencia.executeQuery(sql);
-                while (rs.next()) {
-                    idAdmi = rs.getInt("idAdmin");
-                    usuarioA = rs.getNString("usuarioAdmin");
-                    us.put(idAdmi, usuarioA);
-                }
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return us;
-    }
-     public HashMap<Integer, String> ejecutarSQLSelectC(String sql) {
-
-        ResultSet rs;
-        int idAdmi;
-        String pass;
-
-        BaseDatos objCnt = new BaseDatos();
-        HashMap<Integer, String> ct = new HashMap<>();
-        try {
-            if (objCnt.crearConexion()) {
-                Statement sentencia = objCnt.getConexion().createStatement();
-                rs = sentencia.executeQuery(sql);
-                while (rs.next()) {
-                    idAdmi = rs.getInt("idAdmin");
-                    pass = rs.getNString("contraseñaAdmin");
-                    ct.put(idAdmi, pass);
-                }
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-
-        return ct;
-
-    }
-     public ResultSet obtenerA(String sql) {
-        BaseDatos objCnt = new BaseDatos();
-        ResultSet rs = null;
-        try {
-            if (objCnt.crearConexion()) {
-                Statement sentencia = objCnt.getConexion().createStatement();
-                rs = sentencia.executeQuery(sql);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return rs;
-    }
-
-    public void InsertarAdministrador(String sql) {
-      ResultSet rs = null;
-         BaseDatos objcone = new BaseDatos();
-          if (objcone.crearConexion()) {
-            try {
-                Statement sentencia = objcone.getConexion().createStatement();
-                rs = sentencia.executeQuery(sql);
-               
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-
-            }
-    }
-    }
+    
 }

@@ -236,5 +236,35 @@ public class Producto {
         return lp;
         
     }
-    
+
+    public void insertarProducto(String sql) {
+          ResultSet rs = null;
+         BaseDatos objcone = new BaseDatos();
+          if (objcone.crearConexion()) {
+            try {
+                Statement sentencia = objcone.getConexion().createStatement();
+                rs = sentencia.executeQuery(sql);
+               
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+
+            }
+    }
+        }
+
+    public void EliminarProducto(String sql) {
+    ResultSet rs = null;
+         BaseDatos objcone = new BaseDatos();
+          if (objcone.crearConexion()) {
+            try {
+                Statement sentencia = objcone.getConexion().createStatement();
+                rs = sentencia.executeQuery(sql);
+               
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+
+            }
+    }
+    }
+
 }

@@ -15,11 +15,20 @@ import modelo.Categoria;
 public class controlCategoria {
     
      public LinkedList<Categoria> consultarCategorias() {
-        String sql="Select * from Categorias;";
+        String sql="Select * from categorias;";
         Categoria objc=new Categoria();
         LinkedList<Categoria> listc=objc.buscarCategorias(sql);
         
         return listc;
     }
-    
+     
+     public void insertarCategoria(String categoria){
+       
+        String sql="call weirdthings.insertarCategoria('"+categoria+"');";
+        Categoria objc=new Categoria();
+        objc.insertarCategoria(sql);
+       
+     }
+     
+     
 }
