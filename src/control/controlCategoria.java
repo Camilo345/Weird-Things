@@ -8,17 +8,29 @@ package control;
 import java.util.LinkedList;
 import modelo.Clasificaciones;
 
+import modelo.Categorias;
+
+
 /**
  *
  * @author Bolaños Aldana
  */
 public class controlCategoria {
-    
-      public LinkedList<Clasificaciones> consultarCategorias() {
-        String sql="Select * from clientes;";
-        Clasificaciones objc=new Clasificaciones();
-        LinkedList<Clasificaciones> listc=objc.buscarclasificacion(sql);
-        
+
+     public LinkedList<Categorias> consultarCategorias() {
+        String sql="Select * from categorias;";
+        Categorias objc=new Categorias();
+        LinkedList<Categorias> listc=objc.buscarCategorias(sql);
+        return listc;
     }
-    
+     
+     public void insertarCategoria(String categoria){
+       
+        String sql="call weirdthings.insertarCategoria('"+categoria+"');";
+        Categorias objc=new Categorias();
+        objc.insertarCategoria(sql);
+       
+     }
+     
+     
 }

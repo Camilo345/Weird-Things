@@ -5,16 +5,22 @@
  */
 package modelo;
 
+import control.BaseDatos;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.LinkedList;
+
 /**
  *
- * @author feli_
+ * @author Bolaños Aldana
  */
 public class Categorias {
     
     private int idCate;
 
         private String nombreCategoría;
-
+        
     public Categorias() {
     }
 
@@ -40,29 +46,62 @@ public class Categorias {
      */
     public void setIdCate(int idCate) {
         this.idCate = idCate;
-    }
+    }    
 
-    /**
-     * Get the value of nombreCategoría
-     *
-     * @return the value of nombreCategoría
-     */
     public String getNombreCategoría() {
         return nombreCategoría;
     }
 
-    /**
-     * Set the value of nombreCategoría
-     *
-     * @param nombreCategoría new value of nombreCategoría
-     */
     public void setNombreCategoría(String nombreCategoría) {
         this.nombreCategoría = nombreCategoría;
     }
-
+    
     @Override
     public String toString() {
         return "Categorias{" + "idCate=" + idCate + ", nombreCategor\u00eda=" + nombreCategoría + '}';
     }
-    
+
+    public LinkedList<Categorias> buscarCategorias(String sql) {
+        
+     ResultSet rs = null;
+        LinkedList<Categorias> lc = new LinkedList<>();
+        BaseDatos objcone = new BaseDatos();
+        int idc;
+        String nombreCategorias;
+     
+        if (objcone.crearConexion()) {
+            try {
+                Statement sentencia = objcone.getConexion().createStatement();
+                rs = sentencia.executeQuery(sql);
+                while (rs.next()) {
+                    idc = rs.getInt("IDCate");
+                    nombreCategorias = rs.getString("nombreCategoria");
+                 
+                    lc.add(new Categorias(idc, nombreCategorias));
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+
+            }
+        }
+        return lc;
+        
+    }
+
+    public void insertarCategoria(String sql) {
+      
+         ResultSet rs = null;
+         BaseDatos objcone = new BaseDatos();
+          if (objcone.crearConexion()) {
+            try {
+                Statement sentencia = objcone.getConexion().createStatement();
+                rs = sentencia.executeQuery(sql);
+               
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+
+            }
+    }
+        
+    }
 }

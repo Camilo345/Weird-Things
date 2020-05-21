@@ -5,13 +5,19 @@
  */
 package modelo;
 
+import control.BaseDatos;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.LinkedList;
+
 /**
  *
  * @author feli_
  */
 public class Productos {
     
-    private String IdProducto;
+    private int IdProducto;
     private String nombreProducto;
     private String descripcionProducto;
     private double precioProducto;
@@ -23,7 +29,7 @@ public class Productos {
     public Productos() {
     }
 
-    public Productos(String IdProducto, String nombreProducto, String descripcionProducto, double precioProducto, int unidadesProducto, int IDSubcategoriaF, int IdAdminF, int IdCalificacionF) {
+    public Productos(int IdProducto, String nombreProducto, String descripcionProducto, double precioProducto, int unidadesProducto, int IDSubcategoriaF, int IdAdminF, int IdCalificacionF) {
         this.IdProducto = IdProducto;
         this.nombreProducto = nombreProducto;
         this.descripcionProducto = descripcionProducto;
@@ -39,7 +45,7 @@ public class Productos {
      *
      * @return the value of IdProductos
      */
-    public String getIdProducto() {
+    public int getIdProducto() {
         return IdProducto;
     }
 
@@ -48,7 +54,7 @@ public class Productos {
      *
      * @param IdProducto new value of IdProductos
      */
-    public void setIdProducto(String IdProducto) {
+    public void setIdProducto(int IdProducto) {
         this.IdProducto = IdProducto;
     }
 
@@ -187,6 +193,76 @@ public class Productos {
     @Override
     public String toString() {
         return "Productos{" + "IdProducto=" + IdProducto + ", nombreProducto=" + nombreProducto + ", descripcionProducto=" + descripcionProducto + ", precioProducto=" + precioProducto + ", unidadesProducto=" + unidadesProducto + ", IDSubcategoriaF=" + IDSubcategoriaF + ", IdAdminF=" + IdAdminF + ", IdCalificacionF=" + IdCalificacionF + '}';
+    }
+
+      public LinkedList<Productos> buscarProducto(String sql) {
+       
+        ResultSet rs = null;
+        LinkedList<Productos> lp = new LinkedList<>();
+        BaseDatos objcone = new BaseDatos();
+     int IDProdcucto2=0;
+     String nombreProducto2="";
+     String descripcionProducto2="";
+     double precioProducto2=0;
+     int unidadesProducto2=0;
+     int IDSubcategoriaF2=0;
+     int IdAdminF2=0;
+     int IdCalificacionF2=0;
+        if (objcone.crearConexion()) {
+            try {
+                Statement sentencia = objcone.getConexion().createStatement();
+                rs = sentencia.executeQuery(sql);
+                while (rs.next()) {
+                    IDProdcucto2 = rs.getInt("IDProdcucto");
+                    nombreProducto2 = rs.getString("nombreProducto");
+                    descripcionProducto2 = rs.getString("descripcionProducto");
+                    precioProducto2 = rs.getDouble("precioProducto");
+                    unidadesProducto2 = rs.getInt("unidadesProducto");
+                    IDSubcategoriaF2 = rs.getInt("IDSubcategoriaF");
+                    IdAdminF2 = rs.getInt("IdAdminF");
+                    IdCalificacionF2 = rs.getInt("IdCalificacionF");
+                  
+                 
+                    lp.add(new Productos(IDProdcucto2, nombreProducto2, descripcionProducto2, precioProducto2,
+                                        unidadesProducto2,IDSubcategoriaF2,IdAdminF2,IdCalificacionF2));
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+
+            }
+        }
+        return lp;
+        
+    }
+
+    public void insertarProducto(String sql) {
+          ResultSet rs = null;
+         BaseDatos objcone = new BaseDatos();
+          if (objcone.crearConexion()) {
+            try {
+                Statement sentencia = objcone.getConexion().createStatement();
+                rs = sentencia.executeQuery(sql);
+               
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+
+            }
+    }
+        }
+
+    public void EliminarProducto(String sql) {
+    ResultSet rs = null;
+         BaseDatos objcone = new BaseDatos();
+          if (objcone.crearConexion()) {
+            try {
+                Statement sentencia = objcone.getConexion().createStatement();
+                rs = sentencia.executeQuery(sql);
+               
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+
+            }
+    }
     }
 
 }

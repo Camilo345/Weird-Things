@@ -5,13 +5,17 @@
  */
 package modelo;
 
+import control.BaseDatos;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.LinkedList;
+
 /**
  *
  * @author feli_
  */
 public class Fotos {
-    
-        private int idFoto;
         private String imagen;
     private int IDProductoF;
 
@@ -19,29 +23,10 @@ public class Fotos {
     public Fotos() {
     }
 
-    public Fotos(int idFoto, String imagen, int IDProductoF) {
-        this.idFoto = idFoto;
+    public Fotos(String imagen, int IDProductoF) {
         this.imagen = imagen;
         this.IDProductoF = IDProductoF;
     }
-    /**
-     * Get the value of idFoto
-     *
-     * @return the value of idFoto
-     */
-    public int getIdFoto() {
-        return idFoto;
-    }
-
-    /**
-     * Set the value of idFoto
-     *
-     * @param idFoto new value of idFoto
-     */
-    public void setIdFoto(int idFoto) {
-        this.idFoto = idFoto;
-    }
-
     /**
      * Get the value of IDProductoF
      *
@@ -71,7 +56,7 @@ public class Fotos {
 
     @Override
     public String toString() {
-        return "Fotos{" + "idFoto=" + idFoto + ", imagen=" + imagen + ", IDProductoF=" + IDProductoF + '}';
+        return "Fotos{" + "imagen=" + imagen + ", IDProductoF=" + IDProductoF + '}';
     }
 
     /**
@@ -82,5 +67,49 @@ public class Fotos {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
+    
+     public LinkedList<Fotos> buscarFoto(String sql) {
+        
+     ResultSet rs = null;
+        LinkedList<Fotos> lf = new LinkedList<>();
+        BaseDatos objcone = new BaseDatos();
+        String imagen2;
+        int IDProductoF2;
+     
+        if (objcone.crearConexion()) {
+            try {
+                Statement sentencia = objcone.getConexion().createStatement();
+                rs = sentencia.executeQuery(sql);
+                while (rs.next()) {
+                    imagen2 = rs.getString("imagen");
+                    IDProductoF2 = rs.getInt("IDProductoF");
+                 
+                    lf.add(new Fotos(imagen2, IDProductoF2));
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
 
+            }
+        }
+        return lf;
+        
+    }
+
+    public void EliminarFoto(String sql) {
+        
+         ResultSet rs = null;
+         BaseDatos objcone = new BaseDatos();
+          if (objcone.crearConexion()) {
+            try {
+                Statement sentencia = objcone.getConexion().createStatement();
+                rs = sentencia.executeQuery(sql);
+               
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+
+            }
+    }
+        
+    }
+   
 }

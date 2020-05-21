@@ -3,21 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo;
+package seguridad;
 
 import control.BaseDatos;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
-
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
-
 
 /**
  *
@@ -34,12 +27,12 @@ public class Cuentas {
     private String apellido2;
     private String direccionCuenta;
     private String metodoDePago;
-    private String fechaNacimiento;
+    private Date fechaNacimiento;
 
     public Cuentas() {
     }
 
-    public Cuentas(String correoCuenta, String contraseñaCuenta, String apodoCuenta, String nombre1, String nombre2, String apellido1, String apellido2, String direccionCuenta, String metodoDePago, String fechaNacimiento) {
+    public Cuentas(String correoCuenta, String contraseñaCuenta, String apodoCuenta, String nombre1, String nombre2, String apellido1, String apellido2, String direccionCuenta, String metodoDePago, Date fechaNacimiento) {
         this.correoCuenta = correoCuenta;
         this.contraseñaCuenta = contraseñaCuenta;
         this.apodoCuenta = apodoCuenta;
@@ -57,7 +50,7 @@ public class Cuentas {
      *
      * @return the value of fechaNacimiento
      */
-    public String getFechaNacimiento() {
+    public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
@@ -66,7 +59,7 @@ public class Cuentas {
      *
      * @param fechaNacimiento new value of fechaNacimiento
      */
-    public void setFechaNacimiento(String fechaNacimiento) {
+    public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -244,38 +237,7 @@ public class Cuentas {
 
     @Override
     public String toString() {
-        return "Cuentas{" + "correoCuenta=" + correoCuenta + ", contraseñaCuenta=" + contraseñaCuenta + ", apodoCuenta=" + apodoCuenta + ", nombre1=" + nombre1 + ", nombre2=" + nombre2 + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", direccionCuenta=" + direccionCuenta + ", metodoDePago=" + metodoDePago + ", fechaNacimiento=" + fechaNacimiento + '}';
-    }
-
-
-        public boolean insert(String sql) {
-        BaseDatos objCon = new BaseDatos();
-
-        if (objCon.crearConexion()) {
-            try {
-                Statement sentencia = objCon.getConexion().createStatement();
-                sentencia.executeUpdate(sql);
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean Obtener(String sql) {
-        BaseDatos objCon = new BaseDatos();
-
-        if (objCon.crearConexion()) {
-            try {
-                Statement sentencia = objCon.getConexion().createStatement();
-                sentencia.executeQuery(sql);
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-                return false;
-            }
-        }
-        return true;
+        return "Cuentas{" + "correoCuenta=" + correoCuenta + ", contrase\u00f1aCuenta=" + contraseñaCuenta + ", apodoCuenta=" + apodoCuenta + ", nombre1=" + nombre1 + ", nombre2=" + nombre2 + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", direccionCuenta=" + direccionCuenta + ", metodoDePago=" + metodoDePago + ", fechaNacimiento=" + fechaNacimiento + '}';
     }
 
       public LinkedList<Cuentas> buscarCuentas(String sql) {
@@ -292,7 +254,7 @@ public class Cuentas {
      String apellido22="";
      String direccionCuenta2="";
      String metodoDePago2="";
-     String fechaNacimiento2;
+     Date fechaNacimiento2;
         if (objcone.crearConexion()) {
             try {
                 Statement sentencia = objcone.getConexion().createStatement();
@@ -319,7 +281,7 @@ public class Cuentas {
                  
                     direccionCuenta2 = rs.getString("direccionCuenta");
                     metodoDePago2 = rs.getString("metodoDePago");
-                    fechaNacimiento2 = rs.getString("fechaNacimiento2");
+                    fechaNacimiento2 = rs.getDate("fechaNacimiento2");
                     
                     lc.add(new Cuentas(correoCuenta2, contraseñaCuenta2, apodoCuenta2, nombre12, nombre22,apellido12,apellido22,direccionCuenta2,metodoDePago2,fechaNacimiento2));
                 }
@@ -331,71 +293,24 @@ public class Cuentas {
         return lc;
         
     }
+
+    public void insertarCuenta(String sql) {
+        
+         ResultSet rs = null;
+         BaseDatos objcone = new BaseDatos();
+          if (objcone.crearConexion()) {
+            try {
+                Statement sentencia = objcone.getConexion().createStatement();
+                rs = sentencia.executeQuery(sql);
+               
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+
+            }
+    }
+        
+        
+    }
     
     
-     public HashMap<Integer, String> ejecutarSQLSelect(String sql) {
-
-        ResultSet rs;
-        int correoC;
-        String apodoC;
-
-        BaseDatos objU = new BaseDatos();
-        HashMap<Integer, String> us = new HashMap<>();
-        try {
-            if (objU.crearConexion()) {
-                Statement sentencia = objU.getConexion().createStatement();
-                rs = sentencia.executeQuery(sql);
-                while (rs.next()) {
-                    correoC = rs.getInt("correoCuenta");
-                    apodoC = rs.getNString("apodoCuenta");
-                    us.put(correoC, apodoC);
-                }
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return us;
-    }
-     public HashMap<Integer, String> ejecutarSQLSelectC(String sql) {
-
-        ResultSet rs;
-        int correoC;
-        String pass;
-
-        BaseDatos objCnt = new BaseDatos();
-        HashMap<Integer, String> ct = new HashMap<>();
-        try {
-            if (objCnt.crearConexion()) {
-                Statement sentencia = objCnt.getConexion().createStatement();
-                rs = sentencia.executeQuery(sql);
-                while (rs.next()) {
-                    correoC = rs.getInt("correoCuenta");
-                    pass = rs.getNString("contraseñaCuenta");
-                    ct.put(correoC, pass);
-                }
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-
-        return ct;
-
-    }
-     
-     public ResultSet obtenerC(String sql) {
-        BaseDatos objCnt = new BaseDatos();
-        ResultSet rs = null;
-        try {
-            if (objCnt.crearConexion()) {
-                Statement sentencia = objCnt.getConexion().createStatement();
-                rs = sentencia.executeQuery(sql);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return rs;
-    }
 }
