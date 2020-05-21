@@ -5,16 +5,27 @@
  */
 package vista;
 
+import control.controlFoto;
+import control.controlProducto;
+import java.util.LinkedList;
+import javax.swing.table.DefaultTableModel;
+import modelo.Fotos;
+import modelo.Productos;
+
 /**
  *
  * @author usuario
  */
 public class Inicio extends javax.swing.JFrame {
 
+    LinkedList<Fotos> listaFotos;
+    LinkedList<Productos> listaProductos;
     /**
      * Creates new form Inicio
      */
     public Inicio() {
+        listaFotos = new LinkedList<>();
+        listaProductos = new LinkedList<>();
         initComponents();
     }
 
@@ -27,21 +38,82 @@ public class Inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ProductosTabla = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 36)); // NOI18N
+        jLabel1.setText("WEIRD THINGS");
+
+        ProductosTabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Imagen", "Nombre", "Descripción", "Calificación"
+            }
+        ));
+        jScrollPane1.setViewportView(ProductosTabla);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 787, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(211, 211, 211)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 497, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+
+        controlFoto objf = new controlFoto();   
+        listaFotos = objf.consultarFoto();
+        controlProducto objp = new controlProducto();   
+        listaProductos = objp.consultarProducto();
+                
+        Object[] row = new Object[4];
+        DefaultTableModel modelo = (DefaultTableModel)ProductosTabla.getModel();
+        
+        for(int i=0;i<listaFotos.size();i++){
+           row[0] = listaFotos.get(i).getImagen();
+        }
+        
+        for(int i=0;i<listaProductos.size();i++){
+           row[1] = listaProductos.get(i).getNombreProducto();
+           row[2] = listaProductos.get(i).getDescripcionProducto();
+           row[3] = listaProductos.get(i).getIdCalificacion();
+           
+        }
+         
+// TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -80,5 +152,8 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable ProductosTabla;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
