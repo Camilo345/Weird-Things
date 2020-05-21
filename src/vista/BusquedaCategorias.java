@@ -126,31 +126,31 @@ public class BusquedaCategorias extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     
-          String criterioBusqueda = jTextField1.getText();
-        controlCategoria objcc = new controlCategoria();
-        int ncol;
-        Object[] fila;
-        if (criterioBusqueda.equals("")) {
-            listaCategorias = objcc.consultarCategorias();
-
-            DefaultTableModel modelo = new DefaultTableModel();
-            this.jTable1.setModel(modelo);
-
-            modelo.addColumn("identificacion");
-            modelo.addColumn("nombre");
-            ncol = modelo.getColumnCount();
-
-            //Object[] fila = new Object[ncol];
-            for (int i = 0; i < listaCategorias.size(); i++) {
-                fila = new Object[ncol];
-                fila[0] = listaCategorias.get(i).getIdCate();
-                fila[1] = listaCategorias.get(i).getNombreCategoría();
-                modelo.addRow(fila);
-            }
-
-        }
-        
+//     
+//          String criterioBusqueda = jTextField1.getText();
+//        controlCategoria objcc = new controlCategoria();
+//        int ncol;
+//        Object[] fila;
+//        if (criterioBusqueda.equals("")) {
+//            listaCategorias = objcc.consultarCategorias();
+//
+//            DefaultTableModel modelo = new DefaultTableModel();
+//            this.jTable1.setModel(modelo);
+//
+//            modelo.addColumn("identificacion");
+//            modelo.addColumn("nombre");
+//            ncol = modelo.getColumnCount();
+//
+//            //Object[] fila = new Object[ncol];
+//            for (int i = 0; i < listaCategorias.size(); i++) {
+//                fila = new Object[ncol];
+//                fila[0] = listaCategorias.get(i).getIdCate();
+//                fila[1] = listaCategorias.get(i).getNombreCategoría();
+//                modelo.addRow(fila);
+//            }
+//
+//        }
+//        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

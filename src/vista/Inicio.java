@@ -5,10 +5,15 @@
  */
 package vista;
 
+import control.controlCategoria;
 import control.controlFoto;
 import control.controlProducto;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Map;
 import javax.swing.table.DefaultTableModel;
+import modelo.Categorias;
 import modelo.Fotos;
 import modelo.Productos;
 
@@ -20,12 +25,14 @@ public class Inicio extends javax.swing.JFrame {
 
     LinkedList<Fotos> listaFotos;
     LinkedList<Productos> listaProductos;
+    LinkedList<Categorias> listaCategorias;
     /**
      * Creates new form Inicio
      */
     public Inicio() {
         listaFotos = new LinkedList<>();
         listaProductos = new LinkedList<>();
+        listaCategorias = new LinkedList<>();
         initComponents();
     }
 
@@ -41,6 +48,9 @@ public class Inicio extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ProductosTabla = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -65,6 +75,17 @@ public class Inicio extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(ProductosTabla);
 
+        jButton2.setText("Salir");
+
+        jButton3.setText("Filtrar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,7 +96,14 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -84,7 +112,12 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -95,11 +128,25 @@ public class Inicio extends javax.swing.JFrame {
 
         controlFoto objf = new controlFoto();   
         listaFotos = objf.consultarFoto();
+        
         controlProducto objp = new controlProducto();   
         listaProductos = objp.consultarProducto();
-                
+        
+        controlCategoria objc = new controlCategoria();   
+        HashMap<Integer, String> beC = new HashMap<>();
+        beC = objc.consultarCategorias();
+        Iterator<Map.Entry<Integer, String>> cat = beC.entrySet().iterator();
+        while (cat.hasNext()) {
+            Map.Entry<Integer, String> pair = cat.next();
+            jComboBox1.addItem(pair.getValue());
+        }
+                        
         Object[] row = new Object[4];
         DefaultTableModel modelo = (DefaultTableModel)ProductosTabla.getModel();
+        
+        for(int i=0;i<listaFotos.size();i++){
+           row[0] = listaFotos.get(i).getImagen();
+        }
         
         for(int i=0;i<listaFotos.size();i++){
            row[0] = listaFotos.get(i).getImagen();
@@ -114,6 +161,30 @@ public class Inicio extends javax.swing.JFrame {
          
 // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        controlFoto objf = new controlFoto();   
+        listaFotos = objf.consultarFoto();
+        
+        controlProducto objp = new controlProducto();   
+        listaProductos = objp.consultarProducto();   
+        
+        Object[] row = new Object[4];
+        DefaultTableModel modelo = (DefaultTableModel)ProductosTabla.getModel();
+        
+        for(int i=0;i<listaFotos.size();i++){
+           row[0] = listaFotos.get(i).getImagen();
+        }
+        
+        for(int i=0;i<listaProductos.size();i++){
+           row[1] = listaProductos.get(i).getNombreProducto();
+           row[2] = listaProductos.get(i).getDescripcionProducto();
+           row[3] = listaProductos.get(i).getIdCalificacion();           
+        }        
+        
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,6 +224,9 @@ public class Inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable ProductosTabla;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

@@ -5,6 +5,7 @@
  */
 package control;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import modelo.Clasificaciones;
 
@@ -17,11 +18,22 @@ import modelo.Categorias;
  */
 public class controlCategoria {
 
-     public LinkedList<Categorias> consultarCategorias() {
-        String sql="Select * from categorias;";
-        Categorias objc=new Categorias();
-        LinkedList<Categorias> listc=objc.buscarCategorias(sql);
-        return listc;
+//     public LinkedList<Categorias> consultarCategorias() {
+//        String sql="Select * from categorias;";
+//        Categorias objc=new Categorias();
+//        LinkedList<Categorias> listc=objc.buscarCategorias(sql);
+//        return listc;
+//    }     
+     public HashMap<Integer, String> consultarCategorias() {
+       
+
+        HashMap<Integer, String> be = new HashMap<>();
+        String sql = "select * from categorias;";
+        Categorias objbe = new Categorias();
+        be = objbe.buscarCategorias(sql);
+        
+        return be;
+
     }
      
      public void insertarCategoria(String categoria){

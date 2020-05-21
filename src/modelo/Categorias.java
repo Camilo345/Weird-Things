@@ -9,6 +9,7 @@ import control.BaseDatos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
@@ -60,33 +61,61 @@ public class Categorias {
     public String toString() {
         return "Categorias{" + "idCate=" + idCate + ", nombreCategor\u00eda=" + nombreCategoría + '}';
     }
-
-    public LinkedList<Categorias> buscarCategorias(String sql) {
+    
+    public HashMap<Integer, String> buscarCategorias(String sql) {
+          
         
-     ResultSet rs = null;
-        LinkedList<Categorias> lc = new LinkedList<>();
-        BaseDatos objcone = new BaseDatos();
+         ResultSet rs;
         int idc;
         String nombreCategorias;
-     
-        if (objcone.crearConexion()) {
-            try {
-                Statement sentencia = objcone.getConexion().createStatement();
+
+        BaseDatos objc = new BaseDatos();
+        HashMap<Integer, String> be=new HashMap<>();
+        try {
+            if (objc.crearConexion()) {
+                Statement sentencia = objc.getConexion().createStatement();
                 rs = sentencia.executeQuery(sql);
                 while (rs.next()) {
                     idc = rs.getInt("IDCate");
-                    nombreCategorias = rs.getString("nombreCategoria");
-                 
-                    lc.add(new Categorias(idc, nombreCategorias));
+                    nombreCategorias = rs.getNString("nombreCategoria");
+                    be.put( idc,nombreCategorias);
+                    
                 }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-
             }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
         }
-        return lc;
-        
+
+        return be;
     }
+
+//    public LinkedList<Categorias> buscarCategorias(String sql) {
+//        
+//     ResultSet rs = null;
+//        LinkedList<Categorias> lc = new LinkedList<>();
+//        BaseDatos objcone = new BaseDatos();
+//        int idc;
+//        String nombreCategorias;
+//     
+//        if (objcone.crearConexion()) {
+//            try {
+//                Statement sentencia = objcone.getConexion().createStatement();
+//                rs = sentencia.executeQuery(sql);
+//                while (rs.next()) {
+//                    idc = rs.getInt("IDCate");
+//                    nombreCategorias = rs.getString("nombreCategoria");
+//                 
+//                    lc.add(new Categorias(idc, nombreCategorias));
+//                }
+//            } catch (SQLException ex) {
+//                ex.printStackTrace();
+//
+//            }
+//        }
+//        return lc;
+//        
+//    }
 
     public void insertarCategoria(String sql) {
       
