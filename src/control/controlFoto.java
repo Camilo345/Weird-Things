@@ -30,4 +30,12 @@ public class controlFoto {
        
      }
      
+     public LinkedList<Fotos> TraerFoto(){
+       String sql="Select * from foto;";
+        Fotos objc=new Fotos();
+        LinkedList<Fotos> listc=objc.imagen(sql);
+        
+        return listc;
+       
+     }     
 }

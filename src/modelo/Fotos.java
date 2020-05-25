@@ -6,10 +6,15 @@
 package modelo;
 
 import control.BaseDatos;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -17,6 +22,7 @@ import java.util.LinkedList;
  */
 public class Fotos {
         private String imagen;
+        private ImageIcon image;
     private int IDProductoF;
 
 
@@ -27,6 +33,20 @@ public class Fotos {
         this.imagen = imagen;
         this.IDProductoF = IDProductoF;
     }
+
+    public Fotos(ImageIcon image, int IDProductoF) {
+        this.image = image;
+        this.IDProductoF = IDProductoF;
+    }
+
+    public ImageIcon getImage() {
+        return image;
+    }
+
+    public void setImage(ImageIcon image) {
+        this.image = image;
+    }
+    
     /**
      * Get the value of IDProductoF
      *
@@ -70,7 +90,7 @@ public class Fotos {
     
      public LinkedList<Fotos> buscarFoto(String sql) {
         
-     ResultSet rs = null;
+        ResultSet rs = null;
         LinkedList<Fotos> lf = new LinkedList<>();
         BaseDatos objcone = new BaseDatos();
         String imagen2;
@@ -110,6 +130,40 @@ public class Fotos {
             }
     }
         
+    }
+    
+    public LinkedList<Fotos> imagen(String sql) {
+        
+        ResultSet rs = null;
+        LinkedList<Fotos> lf = new LinkedList<>();
+        BaseDatos objcone = new BaseDatos();
+        ImageIcon imagen2;
+        Blob blob;
+        int IDProductoF2;
+     
+        if (objcone.crearConexion()) {
+            try {
+                Statement sentencia = objcone.getConexion().createStatement();
+                rs = sentencia.executeQuery(sql);
+                while (rs.next()) {
+                    blob = rs.getBlob("imagen");
+                    IDProductoF2 = rs.getInt("IDProductoF");
+                    byte[] data = blob.getBytes(1, (int)blob.length());
+                    BufferedImage img = null;
+                    try {
+                        img = ImageIO.read(new ByteArrayInputStream(data));
+                    } catch (Exception e) {
+                    }
+                    imagen2 = new ImageIcon(img);
+                    lf.add(new Fotos(imagen2, IDProductoF2));
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+
+            }
+        }
+       
+       return lf;
     }
    
 }
